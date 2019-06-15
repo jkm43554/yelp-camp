@@ -4,14 +4,16 @@ var Campground = require('../models/campground');
 var middleware = require('../middleware');
 
 //INDEX route - show all campgrounds
-router.get('/', (req, res)=>{	
-	Campground.find({},(err, allCampgrounds)=>{
-		if(err){
-			console.log(err);
-		} else {
-			res.render('campgrounds/index', {campgrounds: allCampgrounds, currentUser: req.user});
-		}
-	});	
+//INDEX - show all campgrounds
+router.get("/", function(req, res){
+    // Get all campgrounds from DB
+    Campground.find({}, function(err, allCampgrounds){
+       if(err){
+           console.log(err);
+       } else {
+          res.render("campgrounds/index",{campgrounds: allCampgrounds, page: 'campgrounds'});
+       }
+    });
 });
 
 //CREATE ROUTE - create new campgrounds
